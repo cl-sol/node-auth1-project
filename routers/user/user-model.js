@@ -13,6 +13,7 @@ function find() {
 
 function findBy(filter) {
     return db("user")
+        .select("*")    
         .where(filter);
 };
 
@@ -25,7 +26,7 @@ function findById(id) {
 async function addUser(user) {
     try {
         const [id] = await db("user")
-            .insert(user, "id")
+            .insert(user)
         return findById(id)
     } catch(err) {
         res.send({message: "error creating user"});
